@@ -3,5 +3,20 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>DispatchApp Website</display-name>
+  
+<!--   to connect the dispatcher servlet and applicationContext -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>
+  		/WEB-INF/DispatchApp_servlet.xml
+  	</param-value>
+  </context-param>
+  
+<!--   It is used to listen the contextLoader -->
+  <listener>
+  	<listener-class>
+  		org.springframework.web.context.ContextLoaderListener
+  	</listener-class>
+  </listener>
 </web-app>
