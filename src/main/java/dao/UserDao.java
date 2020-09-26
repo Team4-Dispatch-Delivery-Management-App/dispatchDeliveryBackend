@@ -20,6 +20,7 @@ public class UserDao {
 	public void addUser(User user) {
 		//setEnabled： 给注册的用户设置状态
 		user.getAccount().setStatus(true);
+		user.getAccount().setMoney(100);
        
 		//给新注册的用户分配权限，默认是“ROLE_USER”
 		Account account = new Account();
