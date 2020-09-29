@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import lombok.Data;
 @Entity
-@Table(name="option")
+@Table(name="options")
 public @Data class Option implements Serializable{
 	
 	/**
@@ -27,21 +27,18 @@ public @Data class Option implements Serializable{
 	
 	private String startAddress;
 	private String endAddress;
-	private int carrierId; // 自己分配
-	private String carrierType;
 	
-	private String startTime;
 	private String departureTime;
-	private String deliveryTime; // 
+	private String deliveryTime;
 	private String endTime;
 	private float weight;
 	
 	private float fee;
 	
-	@OneToOne
+	@OneToOne(mappedBy="option")
 	private User user;
 	
-	@OneToOne
+	@OneToOne(mappedBy="option")
 	private Carrier carrier;
 	
 	@OneToOne

@@ -1,6 +1,7 @@
 package dispatchApp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public @Data class User implements Serializable {
 	private static final long serialVersionUID = 2652327633296064143L;
 
@@ -30,16 +30,16 @@ public @Data class User implements Serializable {
 	private double balance;
 	
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id")
+	@OneToOne()
 	private Account account;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id")
 	private Address address;
 	
-	@OneToMany
-	@JoinColumn(name = "id")
-	private Order order;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Order> order;
+	
+	@OneToOne()
+	private Option option;
 
 }

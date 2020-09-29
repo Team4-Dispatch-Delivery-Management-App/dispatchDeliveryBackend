@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dispatchApp.model.Option;
-import dispatchApp.model.Order;
 
 
 @Repository
