@@ -45,7 +45,7 @@ public class OrderController {
 		order.setStartAddress(option.getStartAddress());
 		order.setEndAddress(option.getEndAddress());
 		order.setDeliveryTime(option.getDeliveryTime());
-		order.setCarrierType(option.getCarrierType());
+		order.setCarrier(option.getCarrier());
 		order.setFee(option.getFee());
 		// There are 3 status of order: Pending, Departed, Delivered
 		// There are 4 status of carrier: pending, Departed, Delivered
@@ -57,11 +57,11 @@ public class OrderController {
 		/*TODO add the function to update the time when place order*/
 		
 		// heap addition
-		template.getCarrierpq().add(new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrierId())
+		template.getCarrierpq().add(new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrier().getId())
 				.endTime(new DateTime(option.getEndTime())).build());
-		template.getDepartpq().add(new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrierId())
+		template.getDepartpq().add(new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrier().getId())
 				.departureTime(new DateTime(option.getDepartureTime())).build());
-		template.getUserpq().add(new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrierId())
+		template.getUserpq().add(new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrier().getId())
 				.deliveryTime(new DateTime(option.getDeliveryTime())).build());
 		return "redirect:/checkout?optionId=" + optionId;
 	}

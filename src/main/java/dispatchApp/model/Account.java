@@ -8,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,7 +27,7 @@ public @Data class Account implements Serializable {
 	private String type;
 	private float balance;
 
-	@OneToOne(mappedBy = "account")
+	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private User user;
 	
 

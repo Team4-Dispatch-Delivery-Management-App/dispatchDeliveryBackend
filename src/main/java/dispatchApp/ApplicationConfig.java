@@ -24,17 +24,30 @@ public class ApplicationConfig {
 		return sessionFactory;
 	}
 	
-	@Bean(name="dataSource")
+	@Bean(name = "dataSource")
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://"
-				+ "delivery-instance.cottayujb1yg.us-east-2.rds.amazonaws.com"
-				+ ":3306/deliveryApp?serverTimeZone=UTC");
+		// change to your own RDS_Endpoint
+		// change the username and password
+		dataSource.setUrl("jdbc:mysql://laiproject.cairv4vweagh.us-east-2.rds.amazonaws.com:3306/dispatch?serverTimezone=UTC");
 		dataSource.setUsername("admin");
-		dataSource.setPassword("12345678");
+		dataSource.setPassword("549508549Ab!");
+
 		return dataSource;
 	}
+	
+//	@Bean(name="dataSource")
+//	public DataSource dataSource() {
+//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//		dataSource.setUrl("jdbc:mysql://"
+//				+ "delivery-instance.cottayujb1yg.us-east-2.rds.amazonaws.com"
+//				+ ":3306/deliveryApp?serverTimeZone=UTC");
+//		dataSource.setUsername("admin");
+//		dataSource.setPassword("12345678");
+//		return dataSource;
+//	}
 	@Bean
 	public MultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();

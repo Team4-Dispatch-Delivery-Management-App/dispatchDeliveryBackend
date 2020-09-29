@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import lombok.Data;
 @Entity
-@Table(name="Address")
+@Table(name="address")
 public @Data class Address implements Serializable{
 
 	/**
@@ -31,6 +31,6 @@ public @Data class Address implements Serializable{
 	private int zipcode;
 	private String country;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(mappedBy = "address")
 	private User user;
 }

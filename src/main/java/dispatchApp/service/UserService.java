@@ -1,11 +1,12 @@
 package dispatchApp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import dispatchApp.dao.UserDao;
 import dispatchApp.model.User;
 
-
+@Service
 public class UserService {
 	@Autowired
     private UserDao userDao;
