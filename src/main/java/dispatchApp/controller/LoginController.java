@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+
 import dispatchApp.model.User;
 import dispatchApp.service.UserService;
 
 
 
 @Controller
+
 public class LoginController {
+
 	@Autowired
 	private UserService userService;
 
@@ -39,3 +42,4 @@ public class LoginController {
 		
 	}
 }
+

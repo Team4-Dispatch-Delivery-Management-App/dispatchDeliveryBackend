@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
+
 import dispatchApp.model.User;
 import dispatchApp.service.UserService;
 
 public class RegisterController {
+
 	@Autowired
 	private UserService userService;
 
@@ -38,3 +40,4 @@ public class RegisterController {
 	}
 
 }
+
