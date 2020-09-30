@@ -33,11 +33,11 @@ public @Data class Carrier implements Serializable{
 	private int speed;
 	private String status;
 	
-	@OneToOne
+	@OneToOne(mappedBy="carrier")
 	@JsonIgnore
 	private Order order;
 	
-	@OneToOne
+	@OneToOne(mappedBy="carrier")
 	@JsonIgnore
 	private Option option;
 }
