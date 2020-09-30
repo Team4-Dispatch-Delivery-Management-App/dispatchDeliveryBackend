@@ -45,14 +45,14 @@ public class UserDao {
 		}
 	}
 
-	public User getUserByName(String userName) {
+	public User getUserByName(String userEmail) {
 		Account account = null;
 		try (Session session = sessionFactory.openSession()) {
                     session.beginTransaction();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Account> criteriaQuery = builder.createQuery(Account.class);
 			Root<Account> root = criteriaQuery.from(Account.class);
-			criteriaQuery.select(root).where(builder.equal(root.get("email"), userName)); 
+			criteriaQuery.select(root).where(builder.equal(root.get("username"), userEmail)); 
 			account = session.createQuery(criteriaQuery).getSingleResult();
             session.getTransaction().commit();
 		} catch (Exception e) {
