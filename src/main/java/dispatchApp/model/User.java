@@ -39,7 +39,7 @@ public @Data class User implements Serializable {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Order> order;
 	
-	@OneToOne()
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Option option;
 
 }

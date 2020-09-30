@@ -35,12 +35,12 @@ public @Data class Option implements Serializable{
 	
 	private float fee;
 	
-	@OneToOne(mappedBy="option")
+	@OneToOne()
 	private User user;
 	
-	@OneToOne(mappedBy="option")
+	@OneToOne()
 	private Carrier carrier;
 	
-	@OneToOne
+	@OneToOne(mappedBy="option")
 	private Order order;
 }

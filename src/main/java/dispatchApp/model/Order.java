@@ -29,10 +29,10 @@ public @Data class Order implements Serializable{
 	@ManyToOne()
 	private User user;
 	
-	@OneToOne(mappedBy="order")
+	@OneToOne()
 	private Option option;
 	
-	@OneToOne(mappedBy="order")
+	@OneToOne()
 	private Carrier carrier;
 	
 	private String deliveryTime; // user only care abput when their package arrive
