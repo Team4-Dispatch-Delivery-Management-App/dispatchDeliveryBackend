@@ -1,5 +1,7 @@
 package dispatchApp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,8 @@ public class OrderService {
     
     public Order getOrderById(int orderId) {
     	return orderDao.getOrderById(orderId);
+    }
+    public List<Order> getHistoryById(int userId) {
+    	return orderDao.getOrderByUserId(userId);
     }
 }

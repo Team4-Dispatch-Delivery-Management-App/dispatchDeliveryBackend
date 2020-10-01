@@ -39,6 +39,8 @@ public @Data class Order implements Serializable{
 	
 	private String startAddress;
 	private String endAddress;
+	private String startTime;
+	private int externalUserId;
 	
 	private float fee;
 	private String status;

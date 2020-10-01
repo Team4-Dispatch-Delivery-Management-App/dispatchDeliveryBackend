@@ -35,8 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	         .loginPage("/Login")
     	    .and()
     	    .authorizeRequests()
-    	    .antMatchers("/order/**").hasAuthority("ROLE_USER") // 访问order必须是登录的用户 // 和前端确认// history 也要确认
-    	    .antMatchers("/admin*/**").hasAuthority("ROLE_ADMIN")
+    	    //.antMatchers("/order/**").hasAuthority("ROLE_USER") // 访问order必须是登录的用户 // 和前端确认// history 也要确认
+    	    //.antMatchers("/admin*/**").hasAuthority("ROLE_ADMIN")
     	    .anyRequest().permitAll()
     	    .and()
     	    .logout()
