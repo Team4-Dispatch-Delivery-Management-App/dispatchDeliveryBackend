@@ -22,6 +22,7 @@ public class UserService {
 	public User gerUserById(int userId) {
 	   	 return userDao.getUserById(userId);
 	    }
+
 }
 
 
