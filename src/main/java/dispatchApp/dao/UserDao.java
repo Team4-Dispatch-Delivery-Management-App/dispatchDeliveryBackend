@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import dispatchApp.model.Account;
+import dispatchApp.model.Authorities;
 import dispatchApp.model.User;
 
 @Repository
@@ -21,19 +22,22 @@ public class UserDao {
 		//setEnabled： 给注册的用户设置状态
 		user.getAccount().setStatus(true);
 		user.getAccount().setBalance(100);
-       
+		
 		//给新注册的用户分配权限，默认是“ROLE_USER”
-		Account account = new Account();
-		account.setType("ROLE_USER");
-	
-		Session session = null;
+
+	    Authorities authorities = new Authorities();
+	    authorities.setAuthorities("ROLE_USER");
+	    authorities.setEmailId(user.getAccount().getEmail());
+	    Session session = null;
 		
 		
        // 保存用户
 		try {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			session.save(user);
+			session.save(user.getAccount());
+			session.save(user);	
+			session.save(authorities);
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,7 +56,7 @@ public class UserDao {
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Account> criteriaQuery = builder.createQuery(Account.class);
 			Root<Account> root = criteriaQuery.from(Account.class);
-			criteriaQuery.select(root).where(builder.equal(root.get("username"), userEmail)); 
+			criteriaQuery.select(root).where(builder.equal(root.get("email"), userEmail)); 
 			account = session.createQuery(criteriaQuery).getSingleResult();
             session.getTransaction().commit();
 		} catch (Exception e) {
@@ -78,3 +82,4 @@ public class UserDao {
 
 
 }
+

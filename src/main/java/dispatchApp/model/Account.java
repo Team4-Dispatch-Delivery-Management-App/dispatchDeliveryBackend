@@ -24,7 +24,7 @@ public @Data class Account implements Serializable {
 	private String email;
 	private String password;
 	private boolean status;
-	private String type;
+	// 去掉type。Authorities class里面有。
 	private float balance;
 
 	@OneToOne(mappedBy = "account", cascade = CascadeType.ALL, fetch=FetchType.EAGER)

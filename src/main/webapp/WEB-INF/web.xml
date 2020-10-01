@@ -9,7 +9,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/DispatchApp_servlet.xml,
+			/WEB-INF/dispatchApp-servlet.xml
 			<!-- /WEB-INF/webflowConfig.xml -->
 		</param-value>
 	</context-param>

@@ -27,7 +27,7 @@ public @Data class User implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String billingAddress;
-	private double balance;
+	// 去掉balance，放在Account class里
 	
 
 	@OneToOne()
