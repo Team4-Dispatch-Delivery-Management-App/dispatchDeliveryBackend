@@ -16,8 +16,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class ApplicationConfig {
 
 	private static final String USERNAME = "admin";
-	private static final String PASSWORD = "549508549Ab!";
-	private static final String INSTANCE = "laiproject.cairv4vweagh.us-east-2.rds.amazonaws.com";
+	private static final String PASSWORD = "";
+	private static final String INSTANCE = "";
 	private static final String PORT = "3306";
 	private static final String DB_NAME = "dispatch";
 
