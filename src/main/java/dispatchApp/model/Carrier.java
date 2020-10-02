@@ -26,11 +26,9 @@ public @Data class Carrier implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	
 	private String carrierType; // update
 	private int stationId;
-	private int speed;
+	private double speed;
 	private String status;
 	
 	@OneToOne(mappedBy="carrier")
