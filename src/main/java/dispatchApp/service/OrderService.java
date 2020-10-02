@@ -21,7 +21,7 @@ public class OrderService {
     public Order getOrderById(int orderId) {
     	return orderDao.getOrderById(orderId);
     }
-    public List<Order> getHistoryById(int userId) {
-    	return orderDao.getOrderByUserId(userId);
+    public List<Order> getHistoryById(String userEmail) {
+    	return orderDao.getOrderByUserEmail(userEmail);
     }
 }

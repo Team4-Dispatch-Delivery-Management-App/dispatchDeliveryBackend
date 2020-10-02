@@ -16,10 +16,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class ApplicationConfig {
 
 	private static final String USERNAME = "admin";
-	private static final String PASSWORD = "87654321";
-	private static final String INSTANCE = "laidb.cnkl6ocpq7pv.us-west-2.rds.amazonaws.com";
+	private static final String PASSWORD = "549508549Ab!";
+	private static final String INSTANCE = "laiproject.cairv4vweagh.us-east-2.rds.amazonaws.com";
 	private static final String PORT = "3306";
-	private static final String DB_NAME = "laiDB";
+	private static final String DB_NAME = "dispatch";
 
 
 	@Bean(name="sessionFactory")

@@ -36,7 +36,16 @@
 			<artifactId>javax.activation-api</artifactId>
 			<version>1.2.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.maps</groupId>
+			<artifactId>google-maps-services</artifactId>
+			<version>0.1.1</version>
+		</dependency>
 		<!-- used in model package -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>

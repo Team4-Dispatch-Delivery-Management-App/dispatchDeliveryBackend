@@ -43,7 +43,7 @@ public class LoginController {
 		return new ResponseEntity<>(result.toString(),HttpStatus.OK);
 	    }
 	
-	@RequestMapping(value = "/logout")
+	@RequestMapping(value = "Login/logout")
 	public ResponseEntity<String> logout(){
 		System.out.println("new logout received!!!!!!!!!received!!!!!!!!!received!!!!!!!!!received!!!!!!!!!received!!!!!!!!!received!!!!!!!!!");
 		
