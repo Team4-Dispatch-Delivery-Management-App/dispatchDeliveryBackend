@@ -26,7 +26,7 @@ public class RegisterController {
 
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<String> registerUser(@RequestBody String json,
+	public ResponseEntity<?> registerUser(@RequestBody String json,
 			BindingResult result) {
 		System.out.println("new received!!!!!!!!!received!!!!!!!!!received!!!!!!!!!received!!!!!!!!!received!!!!!!!!!received!!!!!!!!!");
 		JSONObject jsonObj=new JSONObject(json);
@@ -58,12 +58,15 @@ public class RegisterController {
 //			return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
 //		}
 		
+		JSONObject res = new JSONObject();
 		User userExist = userService.gerUserByName(email);
 		if(userExist == null) {
 			userService.addUser(user);
-			return new ResponseEntity<String> ("Registered Successfully. Login using email and password.", HttpStatus.OK);
+			res.put("Register Success", "Registered Successfully. Login using email and password.");
+			return new ResponseEntity<> (res.toString(), HttpStatus.OK);
 		}else {
-			return new ResponseEntity<>("The email has been registed. Please log in.", HttpStatus.BAD_REQUEST);
+			res.put("Register Failure", "The email has been registed. Please log in.");
+			return new ResponseEntity<>(res.toString(), HttpStatus.BAD_REQUEST);
 		}
 		
 	}

@@ -26,7 +26,9 @@ public class OrderDao {
 		try {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			session.saveOrUpdate(order);
+			session.save(order);
+			System.out.print("Here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//			System.out.print(order.toString());
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,14 +54,14 @@ public class OrderDao {
 
 	
 
-	public List<Order> getOrderByUserId(int userId) {
+	public List<Order> getOrderByUserEmail(String userEmail) {
 		List<Order> res = new ArrayList<>();
 		try (Session session = sessionFactory.openSession()) {
 			session.beginTransaction();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Order> criteriaQuery = builder.createQuery(Order.class);
 			Root<Order> root = criteriaQuery.from(Order.class);
-			criteriaQuery.select(root).where(builder.equal(root.get("externalUserId"), userId)); 
+			criteriaQuery.select(root).where(builder.equal(root.get("externalUserEmail"), userEmail)); 
 			res =  session.createQuery(criteriaQuery).getResultList();
 			
 			session.getTransaction().commit();
