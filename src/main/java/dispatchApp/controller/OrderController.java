@@ -3,6 +3,8 @@ package dispatchApp.controller;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import dispatchApp.service.OptionService;
 import dispatchApp.service.OrderService;
 import dispatchApp.service.UserService;
 import dispatchApp.utils.Element;
+//import static dispatchApp.utils.Element.*;
 import dispatchApp.utils.HeapClean;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,7 +39,8 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
-
+	
+	@Autowired
 	private HeapClean template;
 
 	@RequestMapping(value = "Login/order/user", method = RequestMethod.POST) // check
@@ -72,13 +76,37 @@ public class OrderController {
 		orderService.addOrder(order);
 		/*TODO add the function to update the time when place order*/
 		
-		// heap addition
-		//template.getCarrierpq().add(new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrier().getId())
-				//.endTime(new DateTime(option.getEndTime())).build());
-		//template.getDepartpq().add(new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrier().getId())
-				//.departureTime(new DateTime(option.getDepartureTime())).build());
-		//template.getUserpq().add(new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrier().getId())
-				//.deliveryTime(new DateTime(option.getDeliveryTime())).build());
+		//heap addition
+		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm");
+		DateTime endTime = formatter.parseDateTime(option.getEndTime());
+		
+		DateTime departureTime = formatter.parseDateTime(option.getDepartureTime());
+		DateTime deliveryTime = formatter.parseDateTime(option.getDeliveryTime());
+//		
+//		System.out.println(order.getId());
+//		System.out.println(option.getCarrier().getId());
+//		System.out.println(endTime.toString("yyyy-MM-dd HH:mm"));
+		
+		Element carrierElement = Element.builder().orderId(order.getId()).carrierId(option.getCarrier().getId())
+				.endTime(endTime).build();
+		Element departElement = Element.builder().orderId(order.getId()).carrierId(option.getCarrier().getId())
+				.departureTime(departureTime).build();
+		Element userElement = Element.builder().orderId(order.getId()).carrierId(option.getCarrier().getId())
+				.deliveryTime(deliveryTime).build();
+		
+//		Element carrierElement = new Element.ElementBuilder().orderId(order.getId()).carrierId(option.getCarrier().getId())
+//				.endTime(endTime).build();
+//		System.out.println(carrierElement.toString());
+		
+		
+		template.getCarrierpq().add(carrierElement);
+		template.getDepartpq().add(departElement);
+		template.getUserpq().add(userElement);
+		
+//		System.out.print(template.getCarrierpq().peek());
+//		System.out.print(template.getDepartpq().peek());
+//		System.out.print(template.getUserpq().peek());
+		
 		JSONObject result = new JSONObject();		
 		result.put("Your order id", order.getId());		
 		return new ResponseEntity<>(result.toString(), HttpStatus.OK);	}

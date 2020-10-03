@@ -3,16 +3,22 @@ package dispatchApp;
 import java.util.Properties;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import dispatchApp.utils.HeapClean;
+
 @Configuration
 @EnableWebMvc
+@EnableScheduling
 public class ApplicationConfig {
 
 	private static final String USERNAME = "admin";
@@ -27,6 +33,7 @@ public class ApplicationConfig {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
 		sessionFactory.setPackagesToScan("dispatchApp.model");
+//		sessionFactory.setPackagesToScan("dispatchApp.utils");
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
@@ -68,4 +75,19 @@ public class ApplicationConfig {
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 		return hibernateProperties;
 	}
+	
+	@Autowired
+	HeapClean heapClean;
+	@Scheduled(fixedDelay = 20000)
+	
+	public void scheduleFixedDelayTask() {
+		System.out.println(heapClean.getCarrierpq().peek());
+		System.out.println(heapClean.getCarrierpq().size());
+		heapClean.check();
+	    System.out.println(
+	      "Fixed delay task - " + System.currentTimeMillis() / 1000);
+	}
+	
+	
+	
 }

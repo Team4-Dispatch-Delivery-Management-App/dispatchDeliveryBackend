@@ -100,6 +100,9 @@ public class OptionService {
 		option.setStartAddress(routes[1].getStartAddress());
 		option.setEndAddress(routes[1].getEndAddress());
 		option.setFee(fee);
+		option.setDepartureTime(departureTime);
+		option.setDeliveryTime(deliveryTime);
+		option.setEndTime(endTime);
 
 		optionDao.addOption(option);
 

@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 import org.joda.time.DateTime;
 import org.joda.time.ReadableInstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import dispatchApp.service.OptionService;
 import dispatchApp.service.OrderService;
@@ -14,6 +15,7 @@ import lombok.Data;;
 /*
  * Date & Time Class used here: https://www.joda.org/joda-time/
  * */
+@Component
 public @Data class HeapClean {
 	@Autowired
 	private OptionService optionService;
@@ -59,24 +61,27 @@ public @Data class HeapClean {
 		
 	}
 	
-	public void check(DateTime currentTime) {
+	public void check() {
+		DateTime currentTime = DateTime.now();
 		// update depart status
-		while (!departpq.isEmpty() && currentTime.isBefore((ReadableInstant) departpq.peek())) {
+		while (!departpq.isEmpty() && currentTime.isAfter( departpq.peek().getDepartureTime())) {
 			Element depart = departpq.poll();
-			optionService.getOptionById(depart.getCarrierId()).getCarrier().setStatus("Departed");
+			orderService.getOrderById(depart.getOrderId()).getCarrier().setStatus("Departed");
 			orderService.getOrderById(depart.getOrderId()).setStatus("Departed");
 		}
 		// update user related status: delivered
-		while (! userpq.isEmpty() && currentTime.isBefore((ReadableInstant) userpq.peek())) {
+		while (!userpq.isEmpty() && currentTime.isAfter(userpq.peek().getDeliveryTime())) {
 			Element finished = userpq.poll();
-			optionService.getOptionById(finished.getCarrierId()).getCarrier().setStatus("Delivered");
+			orderService.getOrderById(finished.getOrderId()).getCarrier().setStatus("Delivered");
 			orderService.getOrderById(finished.getOrderId()).setStatus("Delivered");
 		}
 		// update carrier related status:
-		while (! carrierpq.isEmpty() && currentTime.isBefore((ReadableInstant) carrierpq.peek())) {
+		while (!carrierpq.isEmpty() && currentTime.isAfter(carrierpq.peek().getEndTime())) {
 			Element available = carrierpq.poll();
-			optionService.getOptionById(available.getCarrierId()).getCarrier().setStatus("Available");
+			orderService.getOrderById(available.getOrderId()).getCarrier().setStatus("Available");
 		}
+//		System.out.println(carrierpq.peek());
+//		System.out.println(carrierpq.size());
 		
 	}
 }
