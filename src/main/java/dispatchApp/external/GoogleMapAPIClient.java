@@ -3,7 +3,6 @@ package dispatchApp.external;
 import dispatchApp.model.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
-import dispatchApp.utils.Constants;
 
 public class GoogleMapAPIClient {
 

@@ -105,7 +105,7 @@ public class DirectionsResponse {
 
     /** Receives a JSONObject and returns a list of lists containing latitude and longitude */
     public List<LatLng> getRobotPoints(){
-        int SAMPLE_INTERVAL = 300; // Sample a point every 100 points.
+        int SAMPLE_INTERVAL = 1; // Sample a point every 100 points.
 
         // routes result
         List<List<HashMap<String, String>>> routes = new ArrayList<List<HashMap<String, String>>>() ;
@@ -125,7 +125,7 @@ public class DirectionsResponse {
             /** Traversing all routes */
             for (int i = 0; i < jRoutes.size(); i++){
                 jLegs = ((JsonObject)jRoutes.get(i)).getAsJsonArray("legs");
-                List path = new ArrayList<HashMap<String, String>>();
+                List<HashMap<String, String>> path = new ArrayList<>();
 
                 /** Traversing all legs */
                 for (int j = 0; j<jLegs.size(); j++){
@@ -137,7 +137,7 @@ public class DirectionsResponse {
                         //polyline = (String)(((JsonObject)((JsonObject)jSteps.get(k)).get("polyline")).get("points"));
                         polyline = ((JsonObject)(((JsonObject)jSteps.get(k)).get("polyline"))).get("points").getAsString();
 
-                        List list = decodePoly(polyline);
+                        List<LatLng> list = decodePoly(polyline);
 
                         /** Traversing all points */
                         for (int l = 0; l < list.size(); l++) {
@@ -179,9 +179,9 @@ public class DirectionsResponse {
      * Method to decode polyline points
      * Courtesy : http://jeffreysambells.com/2010/05/27/decoding-polylines-from-google-maps-direction-api-with-java
      * */
-    private List decodePoly(String encoded) {
+    private List<LatLng> decodePoly(String encoded) {
 
-        List poly = new ArrayList();
+        List<LatLng> poly = new ArrayList<>();
         int index = 0, len = encoded.length();
         int lat = 0, lng = 0;
 
