@@ -8,6 +8,8 @@ import org.joda.time.ReadableInstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import dispatchApp.model.Carrier;
+import dispatchApp.model.Order;
 import dispatchApp.service.OptionService;
 import dispatchApp.service.OrderService;
 import dispatchApp.utils.Element;
@@ -66,19 +68,39 @@ public @Data class HeapClean {
 		// update depart status
 		while (!departpq.isEmpty() && currentTime.isAfter( departpq.peek().getDepartureTime())) {
 			Element depart = departpq.poll();
-			orderService.getOrderById(depart.getOrderId()).getCarrier().setStatus("Departed");
-			orderService.getOrderById(depart.getOrderId()).setStatus("Departed");
+			Order order = orderService.getOrderById(depart.getOrderId());
+			order.setStatus("Departed");
+			orderService.updateOrder(order);
+			
+			Carrier carrier = orderService.getOrderById(depart.getOrderId()).getCarrier();
+			carrier.setStatus("Departed");
+			orderService.updateCarrier(carrier);
+			
+//			orderService.getOrderById(depart.getOrderId()).getCarrier().setStatus("Departed");
+//			orderService.getOrderById(depart.getOrderId()).setStatus("Departed");
+			System.out.println("order + carrier departed");
 		}
 		// update user related status: delivered
 		while (!userpq.isEmpty() && currentTime.isAfter(userpq.peek().getDeliveryTime())) {
 			Element finished = userpq.poll();
-			orderService.getOrderById(finished.getOrderId()).getCarrier().setStatus("Delivered");
-			orderService.getOrderById(finished.getOrderId()).setStatus("Delivered");
+			Order order = orderService.getOrderById(finished.getOrderId());
+			order.setStatus("Delivered");
+			orderService.updateOrder(order);
+			
+			Carrier carrier = orderService.getOrderById(finished.getOrderId()).getCarrier();
+			carrier.setStatus("Delivered");
+			orderService.updateCarrier(carrier);
+			
+			System.out.println("order + carrier Delivered");
 		}
 		// update carrier related status:
 		while (!carrierpq.isEmpty() && currentTime.isAfter(carrierpq.peek().getEndTime())) {
 			Element available = carrierpq.poll();
-			orderService.getOrderById(available.getOrderId()).getCarrier().setStatus("Available");
+			Carrier carrier = orderService.getOrderById(available.getOrderId()).getCarrier();
+			carrier.setStatus("Available");
+			orderService.updateCarrier(carrier);
+//			orderService.getOrderById(available.getOrderId()).getCarrier().setStatus("Available");
+			System.out.println("carrier Available");
 		}
 //		System.out.println(carrierpq.peek());
 //		System.out.println(carrierpq.size());

@@ -22,8 +22,8 @@ import dispatchApp.utils.HeapClean;
 public class ApplicationConfig {
 
 	private static final String USERNAME = "admin";
-	private static final String PASSWORD = "";
-	private static final String INSTANCE = "";
+	private static final String PASSWORD = "549508549Ab!";
+	private static final String INSTANCE = "laiproject.cairv4vweagh.us-east-2.rds.amazonaws.com";
 	private static final String PORT = "3306";
 	private static final String DB_NAME = "dispatch";
 
@@ -81,8 +81,8 @@ public class ApplicationConfig {
 	@Scheduled(fixedDelay = 20000)
 	
 	public void scheduleFixedDelayTask() {
-		System.out.println(heapClean.getCarrierpq().peek());
-		System.out.println(heapClean.getCarrierpq().size());
+		System.out.println("peek: " + heapClean.getCarrierpq().peek());
+		System.out.println("size: " + heapClean.getCarrierpq().size());
 		heapClean.check();
 	    System.out.println(
 	      "Fixed delay task - " + System.currentTimeMillis() / 1000);
