@@ -108,7 +108,7 @@ public class CarrierDao {
         //initialize drone
 
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 50; i++) {
             Carrier carrier = new Carrier();
             carrier.setCarrierType("DRONE");
             carrier.setStatus("Available");
@@ -119,12 +119,28 @@ public class CarrierDao {
         //initialize robot
 
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 50; i++) {
             Carrier carrier = new Carrier();
             carrier.setCarrierType("ROBOT");
             carrier.setStatus("Available");
             carrier.setStationId(0);
             addCarrier(carrier);
         }
+    }
+    public void updateCarrier(Carrier carrier) {
+    	Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.saveOrUpdate(carrier);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
     }
 }

@@ -81,8 +81,8 @@ public class ApplicationConfig {
 	@Scheduled(fixedDelay = 20000)
 	
 	public void scheduleFixedDelayTask() {
-		System.out.println(heapClean.getCarrierpq().peek());
-		System.out.println(heapClean.getCarrierpq().size());
+		System.out.println("peek: " + heapClean.getCarrierpq().peek());
+		System.out.println("size: " + heapClean.getCarrierpq().size());
 		heapClean.check();
 	    System.out.println(
 	      "Fixed delay task - " + System.currentTimeMillis() / 1000);

@@ -71,5 +71,22 @@ public class OrderDao {
 
 		return res;
 	}
+	public void updateOrder(Order order) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.saveOrUpdate(order);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+	}
 	
 }
