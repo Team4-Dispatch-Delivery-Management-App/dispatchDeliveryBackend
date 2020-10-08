@@ -31,6 +31,6 @@ public @Data class Address implements Serializable{
 	private int zipcode;
 	private String country;
 	
-	@OneToOne(mappedBy = "address")
+	@OneToOne(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.EAGER)
 	private User user;
 }

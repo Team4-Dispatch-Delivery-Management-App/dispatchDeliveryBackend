@@ -108,7 +108,7 @@ public class CarrierDao {
         //initialize drone
 
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             Carrier carrier = new Carrier();
             carrier.setCarrierType("DRONE");
             carrier.setStatus("Available");
@@ -119,7 +119,7 @@ public class CarrierDao {
         //initialize robot
 
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             Carrier carrier = new Carrier();
             carrier.setCarrierType("ROBOT");
             carrier.setStatus("Available");
