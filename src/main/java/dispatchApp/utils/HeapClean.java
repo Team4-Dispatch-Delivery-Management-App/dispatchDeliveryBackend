@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.ReadableInstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -64,7 +65,8 @@ public @Data class HeapClean {
 	}
 	
 	public void check() {
-		DateTime currentTime = DateTime.now();
+		DateTime currentTime = new DateTime(DateTimeZone.UTC);
+//		DateTime currentTime = DateTime.now();
 		// update depart status
 		while (!departpq.isEmpty() && currentTime.isAfter( departpq.peek().getDepartureTime())) {
 			Element depart = departpq.poll();

@@ -32,7 +32,7 @@ public @Data class Order implements Serializable{
 	@OneToOne()
 	private Option option;
 	
-	@OneToOne()
+	@ManyToOne()
 	private Carrier carrier;
 	
 	private String deliveryTime; // user only care abput when their package arrive

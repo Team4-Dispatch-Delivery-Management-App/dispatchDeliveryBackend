@@ -2,10 +2,13 @@ package dispatchApp.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,9 +41,9 @@ public @Data class Option implements Serializable{
 	@OneToOne()
 	private User user;
 	
-	@OneToOne()
+	@ManyToOne()
 	private Carrier carrier;
 	
-	@OneToOne(mappedBy="option")
+	@OneToOne(mappedBy="option", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Order order;
 }
